@@ -13,18 +13,42 @@ const lensRoute = require("./routes/lensRoute");
 const userCallRequestRoute =require("./routes/userCallRequestRoute")
 
 
-//database connection
+// database connection
+
+// Enable CORS
+const allowedOrigins = [
+    'https://sellyourcamera.in:3000'
+   
+    
+    // Add more allowed origins here
+  ];
+  
+  app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+  });
+
+
+  //allow cors
+
+  app.use(
+    cors({
+        origin: 'https://sellyourcamera.in:3000',
+        credentials:true,
+        methods: ["GET","POST","PUT","DELETE"]
+    })
+  );
 
 try {
  mongoose.connect('mongodb+srv://vg9557755504:Camera%40Market@cameramarket.j2jlkbo.mongodb.net/SellYourCamera', { useNewUrlParser: true });
 } catch (error) {
     console.error(error);
 }
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
-  }));
-app.use(cors());
 app.use(express.json());
 
 
