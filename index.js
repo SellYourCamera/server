@@ -17,7 +17,7 @@ const userCallRequestRoute =require("./routes/userCallRequestRoute")
 
 // Enable CORS
 const allowedOrigins = [
-    'http://sellyourcamera.in:3000'
+    'http://sellyourcamera.in'
    
     
     // Add more allowed origins here
@@ -38,7 +38,7 @@ const allowedOrigins = [
 
   app.use(
     cors({
-        origin: 'http://sellyourcamera.in:3000',
+        origin: 'http://sellyourcamera.in',
         credentials:true,
         methods: ["GET","POST","PUT","DELETE"]
     })
