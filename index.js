@@ -34,6 +34,25 @@ const allowedOrigins = [
     next();
   });
 
+  //reset cookies
+
+  app.use((req, res, next) => {
+    if (req.query.reload === 'true' || req.headers['x-reload'] === 'true') {
+      // Clear the necessary cookies
+      res.clearCookie('myCookie');
+      // Add more cookie clearing logic if needed
+  
+      // Optionally, perform other actions or updates
+  
+      // Redirect back to the same URL without the reload parameter/header
+      const { protocol, hostname, originalUrl } = req;
+      const urlWithoutReload = `${protocol}://${hostname}${originalUrl.split('?')[0]}`;
+      return res.redirect(urlWithoutReload);
+    }
+  
+    next();
+  });
+
 
 try {
  mongoose.connect('mongodb+srv://vg9557755504:Camera%40Market@cameramarket.j2jlkbo.mongodb.net/SellYourCamera', { useNewUrlParser: true });
