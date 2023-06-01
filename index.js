@@ -17,7 +17,8 @@ const userCallRequestRoute =require("./routes/userCallRequestRoute")
 
 // Enable CORS
 const allowedOrigins = [
-    'http://sellyourcamera.in'
+  'http://sellyourcamera.in',
+  'http://www.sellyourcamera.in'
    
     
     // Add more allowed origins here
@@ -33,16 +34,6 @@ const allowedOrigins = [
     next();
   });
 
-
-  //allow cors
-
-  app.use(
-    cors({
-        origin: 'http://sellyourcamera.in',
-        credentials:true,
-        methods: ["GET","POST","PUT","DELETE"]
-    })
-  );
 
 try {
  mongoose.connect('mongodb+srv://vg9557755504:Camera%40Market@cameramarket.j2jlkbo.mongodb.net/SellYourCamera', { useNewUrlParser: true });
