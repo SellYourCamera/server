@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 mongoose.set('strictQuery', false);
 const app = express();
-const user_route = require("../Server/routes/userRoute");
+const user_route = require("./routes/userRoute");
 const { store_route } = require('./routes/storeRoute');
 const category_route = require("./routes/categoryRoute");
 const brandRoute = require("./routes/brandRoute");
@@ -17,7 +17,7 @@ const userCallRequestRoute =require("./routes/userCallRequestRoute")
 
 // Enable CORS
 const allowedOrigins = [
-    'https://sellyourcamera.in:3000'
+    'http://sellyourcamera.in:3000'
    
     
     // Add more allowed origins here
@@ -38,7 +38,7 @@ const allowedOrigins = [
 
   app.use(
     cors({
-        origin: 'https://sellyourcamera.in:3000',
+        origin: 'http://sellyourcamera.in:3000',
         credentials:true,
         methods: ["GET","POST","PUT","DELETE"]
     })
