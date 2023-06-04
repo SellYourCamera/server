@@ -3,6 +3,7 @@ const userRequestModel = require("../models/userCallRequestModel");
 
 const add_user_request = async (req,res) => {
 
+    console.log(req.body.user_name);
     try {
         const add_user_req_data = new userRequestModel({
             user_name:req.body.user_name,
@@ -12,7 +13,7 @@ const add_user_request = async (req,res) => {
             date: Date.now(),
         });
         const saved_data= await add_user_req_data.save();
-        res.status(400).send({
+        res.status(200).send({
             success:true,
             message:"User Request Data Saved Successfully",
             data: saved_data

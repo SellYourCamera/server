@@ -18,8 +18,11 @@ const userCallRequestRoute =require("./routes/userCallRequestRoute")
 // Enable CORS
 const allowedOrigins = [
   'http://sellyourcamera.in',
-  'http://www.sellyourcamera.in'
-   
+  'http://www.sellyourcamera.in',
+  'https://sellyourcamera.in',
+  'https://www.sellyourcamera.in',
+
+
     
     // Add more allowed origins here
   ];
