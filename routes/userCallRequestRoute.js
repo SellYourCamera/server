@@ -7,6 +7,7 @@ user_call_request.use(bodyParser.json());
 user_call_request.use(bodyParser.urlencoded({extended:true}));
 
 user_call_request.post('/userCallRequest',userCallRequestController.add_user_request);
+user_call_request.get('/getUserCallRequest',userCallRequestController.get_user_request);
 
 const multer = require("multer");
 const path = require("path");

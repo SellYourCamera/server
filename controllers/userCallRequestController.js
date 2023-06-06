@@ -22,4 +22,30 @@ const add_user_request = async (req,res) => {
         res.status(400).send({success:false,msg:error.message});
     }
 }
-module.exports = {add_user_request};
+
+
+const get_user_request = async (req,res) => {
+
+    try {
+        var users_data = [];
+        const users = await userRequestModel.find();
+
+        if (users.length > 0) {
+            users.forEach(user => {
+                users_data.push({
+                    "name": user["user_name"],
+                    "email": user["user_email"],
+                    "phone": user["phone"],
+                    "brand": user["cameraBrand"],
+                });
+            });
+
+            res.status(200).send({ success: true, msg: "Data fetch successfully", data: users_data });
+        } else {
+            res.status(400).send({ success: false, msg: "Products not found" });
+        }
+    } catch (error) {
+        res.status(400).send({success:false,msg:error.message});
+    }
+}
+module.exports = {add_user_request,get_user_request};

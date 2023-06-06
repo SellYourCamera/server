@@ -167,7 +167,7 @@ const get_product_by_brand = async (req, res) => {
 
             res.status(200).send({ success: true, msg: "Data sent successfully", data: product_data });
         } else {
-            res.status(200).send({ success: false, msg: "Products not found" });
+            res.status(400).send({ success: false, msg: "Products not found" });
         }
     } catch (error) {
         res.status(400).send({ success: false, msg: error.message });
