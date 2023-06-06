@@ -12,8 +12,8 @@ const cors = require('cors');
 const lensRoute = require("./routes/lensRoute");
 const userCallRequestRoute =require("./routes/userCallRequestRoute")
 
-
-// database connection
+// Enable CORS for all routes
+app.use(cors());
 
 // Enable CORS
 const allowedOrigins = [
@@ -21,8 +21,7 @@ const allowedOrigins = [
   'http://www.sellyourcamera.in',
   'https://sellyourcamera.in',
   'https://www.sellyourcamera.in',
-
-
+  // 'http://localhost',
     
     // Add more allowed origins here
   ];
