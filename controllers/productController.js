@@ -137,16 +137,17 @@ const get_product_by_brand = async (req, res) => {
     try {
         var product_data = [];
         const brandName = req.query.brandName;
+        const category = req.query.category;
         const product_Model = req.query.product_model;
 
-        if (!brandName && !product_Model) {
-            return res.status(400).send({ success: false, msg: "Please provide either brandName or product_model" });
+        if ((!brandName && !product_Model && !category) || (!brandName || !category)) {
+            return res.status(400).send({ success: false, msg: "Please provide both brandName and category" });
         }
 
-        const filter = {};
-        if (brandName) {
-            filter.brand = brandName.toUpperCase();
-        }
+        const filter = {
+            brand: brandName.toUpperCase(),
+            category: category
+        };
         if (product_Model) {
             filter.product_model = product_Model;
         }

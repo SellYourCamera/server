@@ -21,7 +21,7 @@ const allowedOrigins = [
   'http://www.sellyourcamera.in',
   'https://sellyourcamera.in',
   'https://www.sellyourcamera.in',
-  // 'http://localhost',
+  'http://localhost',
     
     // Add more allowed origins here
   ];
@@ -58,6 +58,7 @@ const allowedOrigins = [
 
 try {
  mongoose.connect('mongodb+srv://vg9557755504:Camera%40Market@cameramarket.j2jlkbo.mongodb.net/SellYourCamera', { useNewUrlParser: true });
+ //mongoose.connect('mongodb://localhost:27017/CamMart', { useNewUrlParser: true });
 } catch (error) {
     console.error(error);
 }
