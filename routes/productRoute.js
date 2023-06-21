@@ -32,8 +32,13 @@ product_route.post('/add-product',upload.array('images'),product_controller.add_
 
 product_route.get('/get-product',product_controller.get_product)
 
+// //to get product by brand
+
+// product_route.get('/get-model-product',product_controller.get_product_by_modal );
+
+
 //to get product by brand
 
-product_route.get('/get-brand-product',product_controller.get_product_by_brand )
+product_route.get('/get-category-product',product_controller.get_product_by_filter );
 
 module.exports = product_route;

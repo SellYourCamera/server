@@ -133,24 +133,28 @@ const get_product = async (req, res) => {
 
 //get product by brand
 
-const get_product_by_brand = async (req, res) => {
+const get_product_by_filter = async (req, res) => {
     try {
         var product_data = [];
         const brandName = req.query.brandName;
         const category = req.query.category;
         const product_Model = req.query.product_model;
+        var filter ={};
 
-        if ((!brandName && !product_Model && !category) || (!brandName || !category)) {
+        console.log("brand:",brandName,"model:", productModel,"category",category);
+        if (((!brandName && !category) || (!brandName || !category)) && !productModel) {
             return res.status(400).send({ success: false, msg: "Please provide both brandName and category" });
+        }else if(brandName && category){
+             filter = {
+                brand: brandName.toUpperCase(),
+                category: category
+            };
+        }else if(productModel){
+             filter={product_model :product_Model};
+        }else{
+            return res.status(400).send({ success: false, msg: "Please provide Product Model" });
         }
-
-        const filter = {
-            brand: brandName.toUpperCase(),
-            category: category
-        };
-        if (product_Model) {
-            filter.product_model = product_Model;
-        }
+        
 
         const products = await productModel.find(filter);
 
@@ -175,4 +179,49 @@ const get_product_by_brand = async (req, res) => {
     }
 }
 
-module.exports = { add_product, get_product, get_product_by_brand }
+// //get product by brand
+
+// const get_product_by_modal = async (req, res) => {
+//     try {
+//         var product_data = [];
+//        const filter={};
+//         const product_Model = req.query.product_model;
+
+//         if ((!product_Model) ) {
+//             return res.status(400).send({ success: false, msg: "Please provide brandName or Product Model" });
+//         }
+
+//         // const filter = {
+//         //     brand: brandName.toUpperCase(),
+//         //     category: category
+//         // };
+//         if (product_Model) {
+//             filter.product_model = product_Model;
+//         }else{
+//             return res.status(400).send({success:false,msg:"please provide Product Model"});
+//         }
+
+//         const products = await productModel.find(filter);
+
+//         if (products.length > 0) {
+//             products.forEach(product => {
+//                 product_data.push({
+//                     "category": product["category"],
+//                     "brand": product["brand"],
+//                     "product_model": product["product_model"],
+//                     "price": product["price"],
+//                     "date": product["date"],
+//                     "image": product["image"],
+//                 });
+//             });
+
+//             res.status(200).send({ success: true, msg: "Data sent successfully", data: product_data });
+//         } else {
+//             res.status(400).send({ success: false, msg: "Products not found" });
+//         }
+//     } catch (error) {
+//         res.status(400).send({ success: false, msg: error.message });
+//     }
+// }
+
+module.exports = { add_product, get_product,get_product_by_filter }
