@@ -67,7 +67,7 @@ const get_product = async (req, res) => {
                     products.forEach(product => {
                         product_data.push({
                             "category": product["category"],
-                            "brand": product["brand"],
+                            "brand": product["brand"].toLowerCase(),
                             "product_model": product["product_model"],
                             "price": product["price"],
                             "date": product["date"],
@@ -141,7 +141,6 @@ const get_product_by_filter = async (req, res) => {
         const product_Model = req.query.product_model;
         var filter ={};
 
-        console.log("brand:",brandName,"model:", productModel,"category",category);
         if (((!brandName && !category) || (!brandName || !category)) && !productModel) {
             return res.status(400).send({ success: false, msg: "Please provide both brandName and category" });
         }else if(brandName && category){
@@ -177,6 +176,36 @@ const get_product_by_filter = async (req, res) => {
     } catch (error) {
         res.status(400).send({ success: false, msg: error.message });
     }
+}
+
+const search_product = async (req,res) => {
+    const {key} = req.params;
+   // var search_data = [];
+    console.log(key)
+    var search_data= await productModel.find(
+        {
+            "$or":[
+                {"category":{$regex:key,$options: 'i'}},
+                {"brand":{$regex:key,$options: 'i'}},
+                {"product_model":{$regex:key,$options: 'i'}}
+                
+            ]
+        }
+    )
+
+    // if(data.length>0){
+    //     data.forEach(product => {
+    //         search_data.push({
+    //             "category": product["category"],
+    //             "brand": product["brand"],
+    //             "product_model": product["product_model"],
+    //             "price": product["price"],
+    //             "date": product["date"],
+    //             "image": product["image"],
+    //         });
+    //     });
+    //}
+    res.status(200).send({success:true,msg:"data serach successful",data:search_data})
 }
 
 // //get product by brand
@@ -224,4 +253,4 @@ const get_product_by_filter = async (req, res) => {
 //     }
 // }
 
-module.exports = { add_product, get_product,get_product_by_filter }
+module.exports = { add_product, get_product,get_product_by_filter,search_product }
