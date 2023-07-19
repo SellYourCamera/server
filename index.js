@@ -14,7 +14,7 @@ const lensRoute = require("./routes/lensRoute");
 const userCallRequestRoute =require("./routes/userCallRequestRoute");
 const serachProductsRoute = require("./routes/searchProductsRoute");
 const axios = require('axios');
-const search_product_route = require("./routes/searchProductsRoute");
+// const search_product_route = require("./routes/searchProductsRoute");
 
 
 // Enable CORS for all routes
